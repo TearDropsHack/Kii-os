@@ -43,3 +43,29 @@ modules:
       - scope: user # Also add Flathub user repo, but no user packages
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
+
+  # Identité du système : Kii-OS remplace Aurora dans /etc/os-release.
+  # Placé EN DERNIER volontairement : changer la clé ID peut perturber
+  # l'identification des dépôts COPR pendant le build (cf. doc BlueBuild),
+  # donc on le fait après l'installation des paquets.
+  # ID_LIKE=fedora est OBLIGATOIRE : c'est lui qui permet aux outils tiers
+  # de continuer à reconnaître le système comme une Fedora.
+  # Les clés non listées ici (VERSION, VERSION_ID, OSTREE_VERSION...) sont
+  # laissées intactes et continuent de se mettre à jour à chaque build.
+  - type: os-release
+    properties:
+      NAME: Kii-OS
+      PRETTY_NAME: Kii-OS
+      ID: kii-os
+      ID_LIKE: fedora
+      VARIANT: Kii-OS
+      VARIANT_ID: kii-os
+      IMAGE_ID: kii-os
+      DEFAULT_HOSTNAME: kii-os
+      VERSION_CODENAME: souverain
+      CPE_NAME: "cpe:/o:teardropshack:kii-os:44"
+      ANSI_COLOR: "0;38;2;168;85;247" # violet Kii-OS #A855F7
+      HOME_URL: "https://github.com/TearDropsHack/Kii-os"
+      DOCUMENTATION_URL: "https://github.com/TearDropsHack/Kii-os#readme"
+      SUPPORT_URL: "https://github.com/TearDropsHack/Kii-os/issues"
+      BUG_REPORT_URL: "https://github.com/TearDropsHack/Kii-os/issues"
